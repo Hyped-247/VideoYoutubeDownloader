@@ -1,17 +1,19 @@
 from pytube import YouTube
 
-yt = YouTube(str(input("Enter the video link: ")))
-videos = yt.get_videos()
 
-s = 1
-for v in videos:
-    print(str(s)+". "+str(v))
-    s += 1
+def get_video():
+    yt = YouTube(str(input("Enter the video link: ")))
+    videos = yt.get_videos()
 
-n = int(input("Enter the number of the video: "))
-vid = videos[n-1]
+    s = 1
+    for v in videos:
+        print(str(s)+". "+str(v))
+        s += 1
 
-destination = str(input("Enter the destination: "))
-vid.download(destination)
+    n = int(input("Enter the number of the video: "))
+    vid = videos[n-1]
 
-print(yt.filename+"\nHas been successfully downloaded")
+    destination = str(input("Enter the destination: "))
+    vid.download(destination)
+
+    print(yt.filename+"\nHas been successfully downloaded")
