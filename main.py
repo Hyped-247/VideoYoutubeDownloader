@@ -1,46 +1,26 @@
 from pytube import YouTube
 from tkinter import *
 
-class App(Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.pack()
-
-        self.url = Entry()
-        self.url.pack()
-
-        self.path = Entry() # This creates a place to pass information
-        self.path.pack()
-
-        # here is the application variable
-        self.contents = StringVar()
-        # set it to some value
-        self.contents.set("Enter Video url:")
 
 
-        # tell the entry widget to watch this variable
-        self.url["textvariable"] = self.contents
+def sel():
+   selection = "You selected the option " + str(var.get())
+   label.config(text=selection)
 
-        # and here we get a callback when the user hits return.
-        # we will have the program print out the value of the
-        # application variable when the user hits return
-        self.url.bind('<Key-Return>', self.print_contents)
 
-    def print_contents(self, event):
-        print("hi. contents of entry is now ---->",
-              self.contents.get())
+root = Tk()
+root.title("Video Youtube Downloader") # set up the title.
+var = IntVar()
+# Keep the state Disabled until they start adding 
+R1 = Radiobutton(root, text="Option 1", variable=var, value=1, command=sel, state=DISABLED).pack(anchor=E)
+R2 = Radiobutton(root, text="Option 2", variable=var, value=2, command=sel).pack(anchor=E)
+R3 = Radiobutton(root, text="Option 3", variable=var, value=3, command=sel).pack(anchor=E)
+label = Label(root)
+label.pack()
+root.mainloop()
 
-# create the application
-myapp = App()
 
-#
-# here are method calls to the window manager class
-#
-myapp.master.title("VideoYoutubeDownloader")
-myapp.master.maxsize(1000, 400)
 
-# start the program
-myapp.mainloop()
 
 
 
