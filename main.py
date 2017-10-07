@@ -1,4 +1,3 @@
-# This is the main file from the master class. 
 from pytube import YouTube
 
 yt = YouTube(str(input("Enter the video link: ")))
