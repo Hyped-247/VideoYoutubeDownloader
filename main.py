@@ -8,19 +8,21 @@ def sel():
 
 
 root = Tk()
-root.title("Video Youtube Downloader") # set up the title.
+root.title("Video Youtube Downloader").minsize(880, 880).maxsize(880, 880) # set up the title and size.
+root.configure(background='white') # set up background.
 var = IntVar()
+label = Label(root, "Enter the video link: ").pack(side=LEFT)
+
 yt = YouTube(str(input("Enter the video link: ")))
 videos = yt.get_videos()
 
+
 s = 1
 for v in reversed(videos):
-    # Keep the state Disabled until they start adding
-    Radiobutton(root, text=str(v), variable=var, value=s, command=sel).pack(anchor=E)
+    # Keep the state Disabled until they start adding.
+    Radiobutton(root, text=str(v), padx=40, font=('bold', 20), variable=var, value=s, command=sel).pack(anchor=E)
     s += 1
 
-label = Label(root)
-label.pack()
 root.mainloop()
 
 
@@ -40,6 +42,4 @@ def get_video():
     vid.download(destination)
 
     print(yt.filename+"\nHas been successfully downloaded")
-
-
 get_video()
