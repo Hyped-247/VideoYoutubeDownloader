@@ -1,21 +1,24 @@
 from pytube import YouTube
 from tkinter import *
-# ==================================================Settings==================================================
+# ==================================================Settings=============
 root = Tk()
 root.title("Video Youtube Downloader") # set up the title and size.
 root.geometry('800x500') # set up the size
+root.configure(bg='#3E4149')
 root.resizable(width=False, height=False)
-
-# ==================================================Frames=====================================================
-top = Frame(root, width=800, height=50)
+# ==================================================Variables=======
+quality = StringVar()
+color = '#3E4149'
+# ==================================================Frames===================
+top = Frame(root, width=800, height=50, bg=color)
 top.pack(side=TOP)
-bottom = Frame(root, width=800, height=50)
+bottom = Frame(root, width=800, height=50, bg=color)
 bottom.pack(side=BOTTOM)
-left = Frame(root,  width=600, height=400)
+left = Frame(root,  width=600, height=400, bg=color)
 left.pack(side=LEFT)
-right = Frame(root, width=250, height=400)
+right = Frame(root, width=250, height=400, bg=color)
 right.pack(side=RIGHT)
-# ==================================================Functions===================================================
+# ==================================================Functions==================
 
 
 def clear_all():
@@ -24,11 +27,11 @@ def clear_all():
 
 
 def clear_url():
-    url_text.set("")
+    url.delete(0, 'end')
 
 
 def clear_path():
-    path_text.set("")
+    path.delete(0, 'end')
 
 
 def action():
@@ -38,61 +41,59 @@ def action():
     else:
         return DISABLED
 
+# todo: if the btn1_data or btn2_data is not checked, then tell the user that he needs to do it.
+# todo: also do the same for all the Entries.
+
 
 def download_video(url):
     youtube_url = str(url)
-    if youtube_url.startswith("https://www.youtube.com/"):
+    if youtube_url.startswith("https://www.youtube.com/") and path.get() != "" and quality != "":
         yt = YouTube(youtube_url)
         videos = yt.streams.all()
         if quality.get() == 0:
             video = videos[0]
         else:
             video = videos[len(videos) - 1]
-        video.download(path.get())
+        print(path.get())
+        video.download(path.get())  # download the video..
     else:
-        # tell the user that this is is no a url.
-        print("Please enter a correct url... "+url)
-# ==================================================Variables===================================
-url_text = StringVar()
-path_text = StringVar()
-video_nummber = StringVar()
-quality = StringVar()
-# ==================================================Buttons======================================
-btn_clear_url = Button(right, text="Clear Url", font=('arial', 25, 'bold'), command=lambda: clear_url())\
-    .grid(row=1, columns=1)
-btn_clear_path = Button(right, text="Clear Path", font=('arial', 25, 'bold'), command=lambda: clear_path())\
-    .grid(row=3, columns=1)
+        # ==================================================Update User========================
+        info = "# You might forgot to enter a correct Url or path or haven't checked the Quality"
+        user_update = Label(bottom, font=('arial', 20, 'bold'),text=info, bd=5, anchor='w', bg=color)
+        user_update.grid(row=0, columns=1)
+
+# ==================================================Buttons=================
+btn_clear_url = Button(right, text="Clear Url", font=('arial', 25, 'bold'),
+                       command=lambda: clear_url(), highlightbackground=color).grid(row=1, columns=1)
+btn_clear_path = Button(right, text="Clear Path", font=('arial', 25, 'bold'),
+                        command=lambda: clear_path(), highlightbackground=color).grid(row=3, columns=1)
 btn_clear_all = Button(right, text="Clear all", font=('arial', 25, 'bold'),
-                       command=lambda: clear_all())\
-    .grid(row=5, columns=1)
-btn_down_video = Button(right,  text="Download Video", font=('arial', 22, 'bold')
-                        , command=lambda: download_video(url.get())).grid(row=7, columns=1)
-# ==================================================Labels========================================
+                       command=lambda: clear_all(), highlightbackground=color).grid(row=5, columns=1)
+btn_down_video = Button(right,  text="Download Video", font=('arial', 22, 'bold'),
+                        command=lambda: download_video(url.get()), highlightbackground=color).grid(row=7, columns=1)
+# ==================================================Labels===============
 # This is the top lable
-top_lable = Label(top,  font=('arial', 20, 'bold'), text="YouTube Videos Downloader", bd=5, anchor='w')
+top_lable = Label(top,  font=('arial', 20, 'bold'), text="YouTube Videos Downloader", bd=5,
+                  anchor='w', bg=color)
 top_lable.grid(row=0, columns=1)
 # This is the bottom lable
-bottom_lable = Label(bottom, font=('arial', 20, 'bold'), text="YouTube Videos Downloader", bd=5, anchor='w')
+bottom_lable = Label(bottom, font=('arial', 20, 'bold'), text="YouTube Videos Downloader", bd=5, anchor='w', bg=color)
 bottom_lable.grid(row=0, columns=1)
 # This is for the url
-url_lable = Label(left, font=('arial', 20, 'bold'), text="Url: ",  anchor='w')
+url_lable = Label(left, font=('arial', 20, 'bold'), text="Url: ",  anchor='w', bg=color)
 url_lable.grid(row=1, columns=1)
 # This is for the path
-path_lable = Label(left, font=('arial', 20, 'bold'), text="Path: ",  anchor='w')
+path_lable = Label(left, font=('arial', 20, 'bold'), text="Path: ",  anchor='w', bg=color)
 path_lable.grid(row=2, columns=1)
-
-# ==================================================Entry=======================================
-url = Entry(left, font=('arial', 20, 'bold'), width=37, bd=8, insertwidth=7,
-            bg="powder blue")
+# ==================================================Entry================
+url = Entry(left, font=('arial', 20, 'bold'), width=37, bd=8, insertwidth=7)
 url.grid(row=1,  column=1, sticky=E+S)
-path = Entry(left, font=('arial', 20, 'bold'), width=37, bd=8, insertwidth=7, bg="powder blue")
+path = Entry(left, font=('arial', 20, 'bold'), width=37, bd=8, insertwidth=7)
 path.grid(row=2, column=1, sticky=E+S)
-# ==================================================Radiobutton===================================
-btn1_data = Radiobutton(left, text="Good Quality",  font=('bold', 20), variable=quality,
-                        value=0, state=action())
+# ==================================================Radiobutton============
+btn1_data = Radiobutton(left, text="Good Quality",  font=('arial', 20, 'bold'), variable=quality,  value=0, bg=color)
 btn1_data.grid(row=0,  column=1, sticky=W)
-btn2_data = Radiobutton(left, text="Bad Quality",  font=('bold', 20), variable=quality,
-                        value=1, state=action())
+btn2_data = Radiobutton(left, text="Bad Quality",  font=('arial', 20, 'bold'), variable=quality, value=1, bg=color)
 btn2_data.grid(row=0,  column=1)
 
 
