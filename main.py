@@ -34,17 +34,6 @@ def clear_path():
     path.delete(0, 'end')
 
 
-def action():
-    print("Funcation call.... ")
-    if len(url.get()) > 0 and len(path.get()) > 0:
-        return ACTIVE
-    else:
-        return DISABLED
-
-# todo: if the btn1_data or btn2_data is not checked, then tell the user that he needs to do it.
-# todo: also do the same for all the Entries.
-
-
 def download_video(url):
     youtube_url = str(url)
     if youtube_url.startswith("https://www.youtube.com/") and path.get() != "" and quality != "":
@@ -61,6 +50,7 @@ def download_video(url):
         info = "# You might forgot to enter a correct Url or path or haven't checked the Quality"
         user_update = Label(bottom, font=('arial', 20, 'bold'),text=info, bd=5, anchor='w', bg=color)
         user_update.grid(row=0, columns=1)
+
 
 # ==================================================Buttons=================
 btn_clear_url = Button(right, text="Clear Url", font=('arial', 25, 'bold'),
