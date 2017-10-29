@@ -88,5 +88,3 @@ btn2_data.grid(row=0,  column=1)
 
 
 root.mainloop()
- # /Users/mohammad/Desktop
-# https://www.youtube.com/watch?v=48LtMYGOrpY
