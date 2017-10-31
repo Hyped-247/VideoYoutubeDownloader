@@ -1,15 +1,15 @@
 from pytube import YouTube
 from tkinter import *
-# ==================================================Settings=============
+# ==================================================Settings=====================
 root = Tk()
 root.title("Video Youtube Downloader") # set up the title and size.
 root.geometry('800x500') # set up the size
 root.configure(bg='#3E4149')
 root.resizable(width=False, height=False)
-# ==================================================Variables=======
-quality = StringVar()
+# ==================================================Variables=====================
+quality = IntVar()
 color = '#3E4149'
-# ==================================================Frames===================
+# ==================================================Frames========================
 top = Frame(root, width=800, height=50, bg=color)
 top.pack(side=TOP)
 bottom = Frame(root, width=800, height=50, bg=color)
@@ -18,7 +18,7 @@ left = Frame(root,  width=600, height=400, bg=color)
 left.pack(side=LEFT)
 right = Frame(root, width=250, height=400, bg=color)
 right.pack(side=RIGHT)
-# ==================================================Functions==================
+# ==================================================Functions======================
 
 
 def clear_all():
@@ -36,7 +36,7 @@ def clear_path():
 
 def download_video(url):
     youtube_url = str(url)
-    if youtube_url.startswith("https://www.youtube.com/") and path.get() != "" and quality != "":
+    if youtube_url.startswith("https://www.youtube.com/") and path.get() != "":
         yt = YouTube(youtube_url)
         videos = yt.streams.all()
         if quality.get() == 0:
@@ -45,10 +45,11 @@ def download_video(url):
             video = videos[len(videos) - 1]
         print(path.get())
         video.download(path.get())  # download the video..
+        clear_all()
     else:
         # ==================================================Update User========================
         info = "# You might forgot to enter a correct Url or path or haven't checked the Quality"
-        user_update = Label(bottom, font=('arial', 20, 'bold'),text=info, bd=5, anchor='w', bg=color)
+        user_update = Label(bottom, font=('arial', 20, 'bold'), text=info, bd=5, anchor='w', bg=color)
         user_update.grid(row=0, columns=1)
 
 
@@ -88,3 +89,5 @@ btn2_data.grid(row=0,  column=1)
 
 
 root.mainloop()
+# https://www.youtube.com/watch?v=m8WgHGOak1c
+# /Users/mohammad/Desktop
