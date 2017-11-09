@@ -33,18 +33,16 @@ def clear_url():
 def clear_path():
     path.delete(0, 'end')
 
-# todo: videos that are downloaded are unable to play. 
+
 def download_video(url):
     youtube_url = str(url)
-    if youtube_url.startswith("https://www.youtube.com/") and path.get() != "":
+    if youtube_url.startswith("https://www.youtube.com/"):
         yt = YouTube(youtube_url)
         videos = yt.streams.all()
         if quality.get() == 0:
             video = videos[0]
         else:
             video = videos[len(videos) - 1]
-        print(video)
-        print(path.get())
         video.download(path.get())  # download the video..
         clear_all()
     else:
