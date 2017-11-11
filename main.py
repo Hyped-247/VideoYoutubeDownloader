@@ -3,7 +3,6 @@
 @date Nov, 9, 2017
 """
 
-
 from pytube import YouTube
 from tkinter import *
 # ==================================================Settings=====================
@@ -40,16 +39,16 @@ def clear_path():
     path.delete(0, 'end')
 
 
-def download_video(url):
-    youtube_url = str(url)
-    if youtube_url.startswith("https://www.youtube.com/"):
+def download_video():
+    youtube_url = str(url.get())
+    if youtube_url.startswith('https://www.youtube.com/'):
         yt = YouTube(youtube_url)
         videos = yt.streams.all()
         if quality.get() == 0:
             video = videos[0]
         else:
             video = videos[len(videos) - 1]
-        video.download(path.get())  # download the video..
+        video.download(str(path.get()))  # download the video..
         clear_all()
     else:
         # ==================================================Update User========================
@@ -66,7 +65,7 @@ btn_clear_path = Button(right, text="Clear Path", font=('arial', 25, 'bold'),
 btn_clear_all = Button(right, text="Clear all", font=('arial', 25, 'bold'),
                        command=lambda: clear_all(), highlightbackground=color).grid(row=5, columns=1)
 btn_down_video = Button(right,  text="Download Video", font=('arial', 22, 'bold'),
-                        command=lambda: download_video(url.get()), highlightbackground=color).grid(row=7, columns=1)
+                        command=lambda: download_video(), highlightbackground=color).grid(row=7, columns=1)
 # ==================================================Labels===============
 # This is the top lable
 top_lable = Label(top,  font=('arial', 20, 'bold'), text="YouTube Videos Downloader", bd=5,
@@ -94,5 +93,5 @@ btn2_data.grid(row=0,  column=1)
 
 
 root.mainloop()
-# https://www.youtube.com/watch?v=m8WgHGOak1c
-# /Users/mohammad/Desktop
+# Youtube Url: https://www.youtube.com/watch?v=okB3VsSiG5w
+# file path: /Users/mohammad/Desktop
