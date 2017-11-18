@@ -8,7 +8,7 @@ from tkinter import *
 # ==================================================Settings=====================
 root = Tk()
 root.title("Video Youtube Downloader") # set up the title and size.
-root.geometry('800x500') # set up the size
+root.geometry('800x500')  # set up the size
 root.configure(bg='#3E4149')
 root.resizable(width=False, height=False)
 # ==================================================Variables=====================
@@ -40,7 +40,7 @@ def clear_path():
 
 
 def download_video():
-    youtube_url = str(url.get())
+    youtube_url = str(url.get().strip())
     if youtube_url.startswith('https://www.youtube.com/'):
         yt = YouTube(youtube_url)
         videos = yt.streams.all()
@@ -48,7 +48,7 @@ def download_video():
             video = videos[0]
         else:
             video = videos[len(videos) - 1]
-        video.download(str(path.get()))  # download the video..
+        video.download(str(path.get().strip()))  # download the video..
         clear_all()
     else:
         # ==================================================Update User========================
