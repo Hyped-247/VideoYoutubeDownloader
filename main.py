@@ -7,13 +7,14 @@ from pytube import YouTube
 from tkinter import *
 # ==================================================Settings=====================
 root = Tk()
-root.title("Video Youtube Downloader") # set up the title and size.
+root.title("Video Youtube Downloader")  # set up the title and size.
 root.geometry('800x500')  # set up the size
-root.configure(bg='#3E4149')
+color = 'gray32'
+root.configure(bg=color)
 root.resizable(width=False, height=False)
 # ==================================================Variables=====================
 quality = IntVar()
-color = '#3E4149'
+
 # ==================================================Frames========================
 top = Frame(root, width=800, height=50, bg=color)
 top.pack(side=TOP)
