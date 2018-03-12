@@ -9,7 +9,7 @@ from tkinter import *
 root = Tk()
 root.title("Video Youtube Downloader")  # set up the title and size.
 root.geometry('800x500')  # set up the size
-color = 'gray32'
+color = 'gray77'
 root.configure(bg=color)
 root.resizable(width=False, height=False)
 # ==================================================Variables=====================
